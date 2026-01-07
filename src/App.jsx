@@ -66,7 +66,7 @@ function App() {
         <div className="about-section">
           <h1>Hey there!</h1>
           <p>
-            My name's Jared Lyon, and I'm currently a master's student at the University of California, Irvine studying Data Science.
+            My name is Jared Lyon, and I'm currently a master's student at the University of California, Irvine studying Data Science.
             Before this, I completed my undergraduate degree in Computer Science & Biology at Northeastern University in Boston, MA, where I also
             worked as a bioinformatics intern/co-op at the BioMicro Center at the Massachuessetts Institute of Technology.
             <br /><br />
