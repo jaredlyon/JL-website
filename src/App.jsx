@@ -68,7 +68,7 @@ function App() {
           <p>
             My name is Jared Lyon, and I'm currently a master's student at the University of California, Irvine studying Data Science.
             Before this, I completed my undergraduate degree in Computer Science & Biology at Northeastern University in Boston, MA, where I also
-            worked as a bioinformatics intern/co-op at the BioMicro Center at the Massachuessetts Institute of Technology.
+            worked as a bioinformatics intern/co-op at the BioMicro Center at the Massachusetts Institute of Technology.
             <br /><br />
             I'm primarily interested in data engineering/management as well as machine learning/artificial intelligence, and I'm always looking for opportunities to learn and grow in these fields.
             Feel free to check out some of my personal projects on these topics!
