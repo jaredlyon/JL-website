@@ -57,7 +57,7 @@ function App() {
           <div className="profile-picture">
             <img src="/website pic.jpg" alt="Profile" />
           </div>
-          <a href="/resume_jared_lyon.pdf" download className="resume-link">
+          <a href="/resume_jared_lyon.pdf" target="_blank" rel="noopener noreferrer" className="resume-link">
             » click here for my resume! «
           </a>
         </div>
