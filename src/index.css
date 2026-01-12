@@ -10,9 +10,10 @@ body {
   line-height: 1.6;
   color: #333;
   background-color: #ffffff;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
 #root {
-  min-height: 100vh;
+  height: 100vh;
 }
