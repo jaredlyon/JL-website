@@ -374,6 +374,12 @@ function App() {
           <button onClick={copyEmail} className="email-button">
             {emailCopied ? '✓ Copied!' : '📧 jaredalyon@gmail.com'}
           </button>
+          
+          {/* Decorative Flower */}
+          <div className="flower-decoration">
+            <img src="/cardrive.gif" alt="Decorative animation" />
+            <p className="thanks-message">and thanks for visiting!<br />have a great day :)</p>
+          </div>
         </div>
       </section>
 

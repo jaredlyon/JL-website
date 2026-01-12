@@ -754,3 +754,34 @@
 .volume-slider::-moz-range-thumb:hover {
   transform: scale(1.2);
 }
+
+/* Flower Decoration */
+.flower-decoration {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.flower-decoration img {
+  max-width: 900px;
+  width: 100%;
+  height: auto;
+  opacity: 0.9;
+}
+
+.thanks-message {
+  margin-top: 1.5rem;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  line-height: 1.6;
+}
