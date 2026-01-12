@@ -1,10 +1,26 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './App.css'
 
 function App() {
   const [visibleSections, setVisibleSections] = useState(new Set())
   const [showBackToTop, setShowBackToTop] = useState(false)
   const [emailCopied, setEmailCopied] = useState(false)
+  const [musicPlayerOpen, setMusicPlayerOpen] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [currentTrack, setCurrentTrack] = useState(0)
+  const [volume, setVolume] = useState(0.5)
+  const audioRef = useRef(null)
+
+  const playlist = [
+    { title: 'What They Say', artist: 'Andras, Oscar Key Sung', file: '/Andras, Oscar Key Sung - What They Say.mp3' },
+    { title: 'Fly Like Love', artist: 'Intr0beatz', file: '/Intr0beatz - Fly Like Love.mp3' },
+    { title: 'Smooth Talk', artist: 'Loure', file: '/Loure - Smooth Talk.mp3' },
+    { title: "Beatin' Tha Breaks - Fouk Remix", artist: 'Magic In Threes, Fouk', file: "/Magic In Threes, Fouk - Beatin' Tha Breaks - Fouk Remix.mp3" },
+    { title: 'Eclipses', artist: 'Philip Budny', file: '/Philip Budny - Eclipses.mp3' },
+    { title: 'St. Hippolyte', artist: 'Rhode & Brown', file: '/Rhode & Brown - St. Hippolyte.mp3' },
+    { title: 'Nothing But A Freak', artist: 'Sandboards', file: '/Sandboards - Nothing But A Freak.mp3' },
+    { title: 'I Remember', artist: 'Tell', file: '/Tell - I Remember.mp3' },
+  ]
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -48,6 +64,57 @@ function App() {
     setEmailCopied(true)
     setTimeout(() => setEmailCopied(false), 2000)
   }
+
+  // Music player functions
+  const toggleMusicPlayer = () => {
+    const newState = !musicPlayerOpen
+    setMusicPlayerOpen(newState)
+    if (newState && audioRef.current && !isPlaying) {
+      audioRef.current.play()
+      setIsPlaying(true)
+    }
+  }
+
+  const togglePlayPause = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause()
+      } else {
+        audioRef.current.play()
+      }
+      setIsPlaying(!isPlaying)
+    }
+  }
+
+  const nextTrack = () => {
+    setCurrentTrack((prev) => (prev + 1) % playlist.length)
+    setIsPlaying(true)
+  }
+
+  const previousTrack = () => {
+    setCurrentTrack((prev) => (prev - 1 + playlist.length) % playlist.length)
+    setIsPlaying(true)
+  }
+
+  const handleVolumeChange = (e) => {
+    const newVolume = parseFloat(e.target.value)
+    setVolume(newVolume)
+    if (audioRef.current) {
+      audioRef.current.volume = newVolume
+    }
+  }
+
+  useEffect(() => {
+    if (audioRef.current && isPlaying) {
+      audioRef.current.play()
+    }
+  }, [currentTrack])
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume
+    }
+  }, [])
 
   return (
     <div className="app">
@@ -316,6 +383,58 @@ function App() {
           ↑
         </button>
       )}
+
+      {/* Music Player */}
+      <div className={`music-player ${musicPlayerOpen ? 'open' : ''}`}>
+        <div className="music-player-tab" onClick={toggleMusicPlayer}>
+          <span>listen to some tunes while you scroll :)</span>
+        </div>
+        
+        <div className="music-player-controls">
+          <div className="now-playing">
+            <div className="track-info">
+              <div className="track-scroll">
+                <div className="track-text">
+                  <span>{playlist[currentTrack].title} • {playlist[currentTrack].artist}</span>
+                  <span>{playlist[currentTrack].title} • {playlist[currentTrack].artist}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="player-buttons">
+            <button onClick={previousTrack} className="control-btn" aria-label="Previous track">
+              ⏮
+            </button>
+            <button onClick={togglePlayPause} className="control-btn play-pause" aria-label={isPlaying ? 'Pause' : 'Play'}>
+              {isPlaying ? '⏸' : '▶'}
+            </button>
+            <button onClick={nextTrack} className="control-btn" aria-label="Next track">
+              ⏭
+            </button>
+          </div>
+
+          <div className="volume-control">
+            <span>🔊</span>
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value={volume}
+              onChange={handleVolumeChange}
+              className="volume-slider"
+              aria-label="Volume"
+            />
+          </div>
+        </div>
+
+        <audio
+          ref={audioRef}
+          src={playlist[currentTrack].file}
+          onEnded={nextTrack}
+        />
+      </div>
     </div>
   )
 }
