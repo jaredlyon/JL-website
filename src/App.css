@@ -670,8 +670,16 @@
 .player-buttons {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 10px;
   margin-bottom: 8px;
+}
+
+.cd-spin {
+  width: 44px;
+  height: 44px;
+  margin-right: 5px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 .control-btn {

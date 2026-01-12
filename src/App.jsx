@@ -403,6 +403,11 @@ function App() {
           </div>
 
           <div className="player-buttons">
+            <img 
+              src={isPlaying ? '/cd-spin.gif' : '/cd-spin-pause.png'} 
+              alt="" 
+              className="cd-spin" 
+            />
             <button onClick={previousTrack} className="control-btn" aria-label="Previous track">
               ⏮
             </button>
